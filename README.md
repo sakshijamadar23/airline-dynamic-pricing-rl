@@ -1,2 +1,2 @@
-# airline-dynamic-pricing-rl
+# Airline-dynamic-pricing-rl
    → AI agent that learns optimal                      airline ticket pricing using                      Reinforcement Learning
