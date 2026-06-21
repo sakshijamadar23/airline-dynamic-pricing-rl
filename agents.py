@@ -103,8 +103,9 @@ class DQNetwork(nn.Module):
         x = torch.relu(self.fc2(x))
         return self.fc3(x)
     
-    class DQNAgent:
-    def __init__(self, state_size, action_size):
+
+class DQNAgent:
+    def __init__(self,state_size,action_size):
         self.state_size = state_size
         self.action_size = action_size
 
@@ -121,10 +122,10 @@ class DQNetwork(nn.Module):
         self.optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate)
         self.criterion = nn.MSELoss()
         
-        def remember(self, state, action, reward, next_state, done):
+    def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
         
-        def act(self, state):
+    def act(self, state):
         if np.random.rand() <= self.epsilon:
             return random.randrange(self.action_size)
 
@@ -132,38 +133,6 @@ class DQNetwork(nn.Module):
         q_values = self.model(state)
         return torch.argmax(q_values).item()
     
-    class DQNAgent:
-    def __init__(self, state_size, action_size):
-        self.state_size = state_size
-        self.action_size = action_size
-
-        self.memory = deque(maxlen=5000)
-
-        # Hyperparameters
-        self.gamma = 0.95
-        self.epsilon = 1.0
-        self.epsilon_min = 0.01
-        self.epsilon_decay = 0.995
-        self.learning_rate = 0.001
-        # Models
-        self.model = DQNetwork(state_size, action_size)
-        self.optimizer = optim.Adam(self.model.parameters(), lr=self.learning_rate)
-        self.criterion = nn.MSELoss()
-
-    def remember(self, state, action, reward, next_state, done):
-        # Ensure state, next_state are stored as numpy arrays without the extra batch dim
-        # state is coming in as [1, state_size], so squeeze it to [state_size] for memory storage
-        self.memory.append((state.squeeze(0), action, reward, next_state.squeeze(0), done))
-
-    def act(self, state):
-        if np.random.rand() <= self.epsilon:
-            return random.randrange(self.action_size)
-        # Predict action from Q-network
-        # state comes in as [1, state_size]. Convert to tensor as [1, state_size]
-        state_tensor = torch.FloatTensor(state)
-        with torch.no_grad():
-            q_values = self.model(state_tensor)
-        return torch.argmax(q_values).item()
 
     def replay(self, batch_size):
         if len(self.memory) < batch_size:
