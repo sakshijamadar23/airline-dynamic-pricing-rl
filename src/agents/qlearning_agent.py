@@ -1,3 +1,7 @@
+# Project 2: # Reinforcement Learning for Dynamic Pricing 
+# Role : Q-Learning Developer &  Baseline Strategies and Q-Learning 
+# WHAT THEY BUILD Q-LearningAgent.py
+
 import numpy as np 
 import random
 
