@@ -30,9 +30,8 @@ class AirlinePricingEnv(gym.Env):
         self.total_days   = 30      # days in the selling window
 
         # Price options the AI can choose from (its "actions")
-        self.price_levels = [500, 1000, 1500, 2000, 2500,
-                             3000, 3500, 4000, 5000, 7000]
-        self.n_actions    = len(self.price_levels)
+        self.price_levels = [500, 1500, 3000, 5000, 7000]
+        self.n_actions = 5
 
         # ── Gymnasium: define action & observation spaces ─────────
         # Action space: AI picks one index (0 to 9) → maps to a price
@@ -41,7 +40,7 @@ class AirlinePricingEnv(gym.Env):
         # Observation space: [seats_remaining, days_remaining]
         self.observation_space = spaces.Box(
             low   = np.array([0, 0]),
-            high  = np.array([self.total_seats, self.total_days]),
+            high = np.array([self.total_seats, self.total_days]),
             dtype = np.float32
         )
 
